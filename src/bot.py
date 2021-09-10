@@ -5,6 +5,8 @@ from discord.ext import commands
 from tools.autocogs import AutoCogs
 import random
 from dotenv import load_dotenv
+import aiosqlite
+import config
 load_dotenv(verbose=True)
 
 
@@ -19,6 +21,9 @@ class MyBot(commands.Bot):
                                                                                                type=discord.ActivityType.playing))
         print("Bot is ready.")
 
+    async def is_owner(self, user):
+        if user.id in config.OWNER:
+            return True
 
     async def on_guild_join(self,guild):
         em = embeds(guild=guild).guild_join_thx()
@@ -28,7 +33,8 @@ class MyBot(commands.Bot):
             ch = self.get_channel((random.choice(guild.channels)).id)
             await ch.send(embed=em)
 
-
+    async def create_db_con(self=None):
+        MyBot.db_con = await aiosqlite.connect("./utils/db/db.db")
     """async def on_guild_remove(self,guild):
         await self.tracker.remove_guild_cache(guild)"""
 
@@ -40,4 +46,5 @@ my_bot = MyBot(command_prefix=os.getenv("PREFIX"), intents=INTENTS)
 
 
 if __name__ == "__main__":
+    my_bot.loop.run_until_complete(MyBot.create_db_con())
     my_bot.run(os.getenv('TOKEN'))
