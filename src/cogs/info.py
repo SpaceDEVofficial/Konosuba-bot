@@ -1,3 +1,5 @@
+import io
+
 import discord
 from discord.ext import commands
 from utils.create_embed import embeds
@@ -11,7 +13,8 @@ class info(commands.Cog):
     @commands.command(name="정보")
     async def info(self,ctx):
         img = await gencard(bot=self.bot,ctx=ctx).GenerateInfoCard()
-        await ctx.replt(file=discord.File(fp=img,filename=f'{ctx.author.id}.png'))
+        if img:
+            await ctx.reply(file=discord.File(fp='./utils/card.png',filename='card.png'))
 
 
 def setup(bot):
