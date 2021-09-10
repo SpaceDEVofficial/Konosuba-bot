@@ -11,7 +11,7 @@ class regist(commands.Cog):
     async def skill(self,ctx):
         em = embeds().aqua_skill()
         msg = await ctx.reply(embed=em)
-        await asyncio.sleep(3.1)
+        await asyncio.sleep(2.9)
         em = embeds().idle_embed()
         await msg.edit(embed=em)
 

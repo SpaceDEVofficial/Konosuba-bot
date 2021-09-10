@@ -16,6 +16,16 @@ class regist(commands.Cog):
         em = embeds().regist_no()
         await ctx.reply(embed=em)
 
+    @commands.command(name="탈퇴")
+    async def unregist(self, ctx):
+        res = await DB_tools(ctx=ctx, bot=self.bot).unregist()
+        if res == True:
+            em = embeds().unregist_ok()
+            await ctx.reply(embed=em)
+            return
+        em = embeds().unregist_no()
+        await ctx.reply(embed=em)
+
 
 def setup(bot):
     bot.add_cog(regist(bot))

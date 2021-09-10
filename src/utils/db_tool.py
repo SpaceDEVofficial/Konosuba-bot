@@ -23,3 +23,15 @@ class DB_tools:
             return True
         return False
 
+    async def unregist(self):
+        DB = self.bot.db_con
+        cur = await DB.execute("SELECT * FROM user_db WHERE user_id == ?",(self.ctx.author.id,))
+        db = await cur.fetchone()
+        if db != None:
+            await DB.execute("DELETE FROM user_db WHERE  user_id = ?",(self.ctx.author.id,))
+            await DB.execute("DELETE FROM guild_member WHERE  user_id = ?", (self.ctx.author.id,))
+            await DB.execute("DELETE FROM user_gift WHERE  user_id = ?", (self.ctx.author.id,))
+            await DB.commit()
+            return True
+        return False
+

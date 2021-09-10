@@ -31,6 +31,35 @@ class embeds:
         )
         em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
         em.set_image(url="https://i.imgur.com/ZreNR44.png")
+        em.set_footer(icon_url="https://i.imgur.com/mKq53H3.png",text="원활한 사용을 위해 인터넷 환경이 좋은 곳에서 사용해주세요.")
+        return em
+
+    def unregist_ok(self):
+        em = discord.Embed(
+            title="Unregister Success!",
+            description="""
+            탈퇴가 완료되었어요!
+            다움에도 만날수있길 기원할게요!
+            """,
+            color=discord.Color.from_rgb(54, 57, 63)
+        )
+        em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
+        em.set_image(url="https://i.imgur.com/ZreNR44.png")
+        em.set_footer(icon_url="https://i.imgur.com/mKq53H3.png",text="탈퇴 완료.")
+        return em
+
+    def unregist_no(self):
+        em = discord.Embed(
+            title="Unregister Fails",
+            description="""
+            탈퇴가 완료되지않았어요..
+            가입을 안하신것같은데요?
+            """,
+            color=discord.Color.from_rgb(54, 57, 63)
+        )
+        em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
+        em.set_image(url="https://i.imgur.com/ZreNR44.png")
+        em.set_footer(icon_url="https://i.imgur.com/mKq53H3.png",text="탈퇴 실패.")
         return em
 
     def regist_no(self):
