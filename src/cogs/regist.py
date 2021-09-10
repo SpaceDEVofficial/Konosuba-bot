@@ -9,7 +9,7 @@ class regist(commands.Cog):
     @commands.command(name="가입")
     async def regist(self,ctx):
         res = await DB_tools(ctx=ctx,bot=self.bot).regist()
-        if res == True:
+        if res:
             em = embeds().regist_ok()
             await ctx.reply(embed=em)
             return
@@ -19,7 +19,7 @@ class regist(commands.Cog):
     @commands.command(name="탈퇴")
     async def unregist(self, ctx):
         res = await DB_tools(ctx=ctx, bot=self.bot).unregist()
-        if res == True:
+        if res:
             em = embeds().unregist_ok()
             await ctx.reply(embed=em)
             return
