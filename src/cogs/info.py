@@ -13,8 +13,8 @@ class info(commands.Cog):
     @commands.command(name="정보")
     async def info(self,ctx):
         img = await gencard(bot=self.bot,ctx=ctx).GenerateInfoCard()
-        if img:
-            await ctx.reply(file=discord.File(fp='./utils/card.png',filename='card.png'))
+        if img["type"]:
+            await embeds(ctx=ctx).info_embed(img=img["img"],img_name='output.png',url="attachment://output.png")
 
 
 def setup(bot):

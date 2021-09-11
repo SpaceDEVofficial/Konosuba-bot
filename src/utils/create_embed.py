@@ -87,3 +87,13 @@ class embeds:
         em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
         em.set_image(url="https://i.imgur.com/ZreNR44.png")
         return em
+
+    async def info_embed(self,img,img_name,url):
+        file = discord.File(img, img_name)
+        em = discord.Embed(
+            title=f"{self.ctx.author}님의 모험자카드!",
+            description="현재 멤버와 스태미나,쿼츠,에리스 자금을 보여드려요!"
+        )
+        em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
+        em.set_image(url=url)
+        return await self.ctx.reply(file=file,embed=em)
