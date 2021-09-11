@@ -7,7 +7,7 @@ class DB_tools:
 
     async def regist(self):
         DB = self.bot.db_con
-        cur = await DB.execute("SELECT * FROM user_db WHERE user_id == ?",(self.ctx.author.id,))
+        cur = await DB.execute("SELECT * FROM user_db WHERE user_id = ?",(self.ctx.author.id,))
         db = await cur.fetchone()
         if db == None:
             await DB.execute("INSERT INTO user_db VALUES (?,?,?,?,?)",
@@ -25,7 +25,7 @@ class DB_tools:
 
     async def unregist(self):
         DB = self.bot.db_con
-        cur = await DB.execute("SELECT * FROM user_db WHERE user_id == ?",(self.ctx.author.id,))
+        cur = await DB.execute("SELECT * FROM user_db WHERE user_id = ?",(self.ctx.author.id,))
         db = await cur.fetchone()
         if db != None:
             await DB.execute("DELETE FROM user_db WHERE  user_id = ?",(self.ctx.author.id,))
@@ -34,4 +34,12 @@ class DB_tools:
             await DB.commit()
             return True
         return False
+
+    async def get_info(self):
+        DB = self.bot.db_con
+        cur = await DB.execute("SELECT * FROM user_db WHERE user_id = ?", (self.ctx.author.id,))
+        db = await cur.fetchone()
+        if db != None:
+            return {"type":True,"item":db}
+        return {"type":False,"item":None}
 
