@@ -1,5 +1,12 @@
 import discord
 
+gacha_name= {
+    "kazuma":"카즈마",
+    "aqua":"아쿠아",
+    "megumin":"메구밍",
+    "darkness":"다크니스"
+}
+
 class embeds:
     def __init__(self,ctx=None,bot=None,guild=None):
         self.ctx = ctx
@@ -96,4 +103,23 @@ class embeds:
         )
         em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
         em.set_image(url=url)
+        return await self.ctx.reply(file=file,embed=em)
+
+    def gacha_res_embed(self,name,star:int,main_img,icon_img):
+        em = discord.Embed(
+            title=f"{gacha_name[name]} | {'⭐'*star}",
+            description=f"뽑힌 멤버: {gacha_name[name]} | `{'⭐'*star}`급"
+        )
+        em.set_thumbnail(url=icon_img)
+        em.set_image(url=main_img)
+        return em
+
+    async def gacha_loading_embed(self):
+        file = discord.File("./asset/skill_gif/gacha_performance_1.gif", "gacha_performance_1.gif")
+        em = discord.Embed(
+            title="뽑는중...",
+            description="과연 어떤 멤버가 뽑힐까요?"
+        )
+        em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
+        em.set_image(url="attachment://gacha_performance_1.gif")
         return await self.ctx.reply(file=file,embed=em)
