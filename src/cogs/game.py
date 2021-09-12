@@ -3,6 +3,7 @@ from discord.ext import commands
 from utils.create_embed import embeds
 from utils.db_tool import DB_tools
 from utils.gacha_tool import gacha
+from utils.checks import require
 import asyncio
 """class Confirm(discord.ui.View):
     def __init__(self):
@@ -27,10 +28,13 @@ import asyncio
         self.value = False
         self.stop()"""
 class game(commands.Cog):
+    """
+    게임관련을 처리하는 그룹이야
+    """
     def __init__(self,bot):
         self.bot = bot
 
-    @commands.command(name="스킬")
+    @commands.command(name="스킬",help="아쿠아의 스킬을 볼수있어!")
     async def skill(self,ctx):
         em = embeds().aqua_skill()
         msg = await ctx.reply(embed=em)
@@ -38,9 +42,11 @@ class game(commands.Cog):
         em = embeds().idle_embed()
         await msg.edit(embed=em)
 
-    @commands.command(name="뽑기")
+    @require()
+    @commands.command(name="뽑기",help="멤버를 뽑을 수 있어! 아직 베타라 저장은 안돼!")
     async def gacha(self,ctx):
         res = await gacha(ctx=ctx,bot=self.bot).GaCha()
+        print(res)
         msg = await embeds(ctx=ctx).gacha_loading_embed()
         await asyncio.sleep(5.0)
         await msg.delete()

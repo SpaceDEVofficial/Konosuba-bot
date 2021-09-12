@@ -45,8 +45,8 @@ class DB_tools:
 
     async def update_gacha(self):
         try:
-            await self.bot.db_con.execute("UPDATE user_db SET quts = quts - 5 WHERE user_id = ?",(self.ctx.author.id,))
-            await self.bot.db_con.commit()
+            #await self.bot.db_con.execute("UPDATE user_db SET quts = quts - 5 WHERE user_id = ?",(self.ctx.author.id,))
+            #await self.bot.db_con.commit()
             return True
         except:
             return False
