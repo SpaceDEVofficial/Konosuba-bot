@@ -26,6 +26,8 @@ class MyBot(commands.Bot):
             return True
 
     async def on_guild_join(self,guild):
+        if guild.id == 653083797763522580:
+            return
         em = embeds(guild=guild).guild_join_thx()
         try:
             await guild.owner.send(embed=em)

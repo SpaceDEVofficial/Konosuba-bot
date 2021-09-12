@@ -1,5 +1,7 @@
+import os
 import discord
-
+from dotenv import load_dotenv
+load_dotenv(verbose=True)
 gacha_name= {
     "kazuma":"카즈마",
     "aqua":"아쿠아",
@@ -115,11 +117,23 @@ class embeds:
         return em
 
     async def gacha_loading_embed(self):
-        file = discord.File("./asset/skill_gif/gacha_performance_1.gif", "gacha_performance_1.gif")
+        #file = discord.File("./asset/skill_gif/gacha_performance_1.gif", "gacha_performance_1.gif")
         em = discord.Embed(
             title="뽑는중...",
             description="과연 어떤 멤버가 뽑힐까요?"
         )
         em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
-        em.set_image(url="attachment://gacha_performance_1.gif")
-        return await self.ctx.reply(file=file,embed=em)
+        #em.set_image(url="attachment://gacha_performance_1.gif")
+        em.set_image(url="https://media.discordapp.net/attachments/885771035243347978/886586861487808532/gacha_performance_1.gif")
+        #return await self.ctx.reply(file=file,embed=em)
+        return await self.ctx.reply(embed=em)
+
+    async def NotRegister(self):
+        print(self.ctx)
+        em = discord.Embed(
+            title="⚠에러!",
+            description=f"가입하지 않으셨어요! `{os.getenv('PREFIX')}가입`(으)로 가입하세요!"
+        )
+        em.set_thumbnail(url="https://media.discordapp.net/attachments/885771035243347978/886603941423489076/stamp_07.png?width=644&height=644")
+        em.set_image(url="https://i.imgur.com/ZreNR44.png")
+        return await self.ctx.reply(embed=em)
