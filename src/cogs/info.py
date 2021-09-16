@@ -25,6 +25,7 @@ class info(commands.Cog):
     @commands.command(name="공지사항",help="코노스바 공식 포럼에 올라와있는 공지사항을 확인해볼 수 있어!")
     async def forum_notice(self,ctx):
         resp = await notice()._get_notice()
+        print(resp)
         await embeds(ctx=ctx).send_notice_embed(content=resp)
 
 

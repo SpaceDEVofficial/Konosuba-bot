@@ -1,6 +1,6 @@
 import re
 import html
-from api_get import _request_api
+from .api_get import _request_api
 class notice:
 
     def __init__(self):

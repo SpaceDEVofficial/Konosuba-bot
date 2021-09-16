@@ -1,4 +1,6 @@
+import html
 import os
+
 import discord
 from dotenv import load_dotenv
 load_dotenv(verbose=True)
@@ -141,11 +143,13 @@ class embeds:
     async def send_notice_embed(self,content):
         global desc
         url = "https://forum.nexon.com/konosubamobile/board_view?thread="
+        desc = []
         for i in content["stickyThreads"]:
-            desc = f"{i['title']}[<{url + i['threadId']}>]\n작성자: {i['user']['nickname']}\n작성일: <t:{i['createDate']}:R>"
+            cleantext = html.unescape(i['title'])
+            desc.append(f"[{cleantext}](<{url + i['threadId']}>)\n작성자: {i['user']['nickname']}\n작성일: <t:{i['createDate']}:R>")
         em = discord.Embed(
             title="코노스바 모바일 판타스틱 데이즈 공식 포럼 공지사항",
-            description=desc
+            description="\n".join(desc)
         )
         em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
         em.set_footer(text="이 봇은 NEXON에서 서비스하는 봇이 아닙니다.")
