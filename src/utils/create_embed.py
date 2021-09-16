@@ -137,3 +137,16 @@ class embeds:
         em.set_thumbnail(url="https://media.discordapp.net/attachments/885771035243347978/886603941423489076/stamp_07.png?width=644&height=644")
         em.set_image(url="https://i.imgur.com/ZreNR44.png")
         return await self.ctx.reply(embed=em)
+
+    async def send_notice_embed(self,content):
+        global desc
+        url = "https://forum.nexon.com/konosubamobile/board_view?thread="
+        for i in content["stickyThreads"]:
+            desc = f"{i['title']}[<{url + i['threadId']}>]\n작성자: {i['user']['nickname']}\n작성일: <t:{i['createDate']}:R>"
+        em = discord.Embed(
+            title="코노스바 모바일 판타스틱 데이즈 공식 포럼 공지사항",
+            description=desc
+        )
+        em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
+        em.set_footer(text="이 봇은 NEXON에서 서비스하는 봇이 아닙니다.")
+        return await self.ctx.reply(embed=em)
