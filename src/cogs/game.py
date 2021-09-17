@@ -43,6 +43,7 @@ class game(commands.Cog):
         await msg.edit(embed=em)
 
     @require()
+    @commands.cooldown(2, 60, commands.BucketType.user)
     @commands.command(name="뽑기",help="멤버를 뽑을 수 있어! 아직 베타라 저장은 안돼!")
     async def gacha(self,ctx):
         res = await gacha(ctx=ctx,bot=self.bot).GaCha()

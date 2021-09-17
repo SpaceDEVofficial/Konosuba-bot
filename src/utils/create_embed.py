@@ -154,3 +154,13 @@ class embeds:
         em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
         em.set_footer(text="이 봇은 NEXON에서 서비스하는 봇이 아닙니다.")
         return await self.ctx.reply(embed=em)
+
+    async def Not_support_guild(self):
+        url = "https://discord.gg/Jk6VRvsnqa"
+        em = discord.Embed(
+            title="하트인증실패💔",
+            description=f"하트인증을 하기위해선 공식 서포트 서버에서만 사용하셔야합니다.\n[초대링크](<{url}>)"
+        )
+        em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
+        em.set_footer(text="이 봇은 NEXON에서 서비스하는 봇이 아닙니다.")
+        return await self.ctx.reply(embed=em)

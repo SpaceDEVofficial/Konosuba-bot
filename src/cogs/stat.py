@@ -6,6 +6,9 @@ import koreanbots
 import UniqueBotsKR
 from discord.ext import commands
 from dotenv import load_dotenv
+
+from utils.create_embed import embeds
+
 load_dotenv(verbose=True)
 
 class MyStatcordCog(commands.Cog):
@@ -48,6 +51,8 @@ class MyStatcordCog(commands.Cog):
     @commands.command(name="하트인증",help="각각의 봇 사이트에서 하트를 인증할수있어!")
     @commands.cooldown(1,60*60,commands.BucketType.user)
     async def heart_check(self,ctx):
+        if ctx.guild.id != 847729860881154078:
+            return await embeds(ctx=ctx).Not_support_guild()
         await self.get_heart(ctx=ctx,id=ctx.author.id)
 
 

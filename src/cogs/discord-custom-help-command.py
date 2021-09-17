@@ -93,8 +93,7 @@ class Help(commands.Cog):
                 emb.add_field(name='그룹에 속하지 않음', value=commands_desc, inline=False)
 
             # setting information about author
-            emb.add_field(name="About", value=f"이 명령어는 `Chriѕ#0001`님이 만드신소스를 활용하였습니다.\n\
-                                    [링크](<https://github.com/nonchris/discord-fury>)")
+            emb.add_field(name="About", value=f"이 명령어는 `Chriѕ#0001`님이 만드신소스를 활용하였습니다.\n[링크](<https://github.com/nonchris/discord-fury>)\n\n[봇 초대](<https://koreanbots.dev/bots/885712681498214450>)")
             emb.set_footer(text=f"버전: {version}")
 
         # block called when one cog-name is given

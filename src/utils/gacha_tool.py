@@ -55,7 +55,7 @@ class gacha:
 
     def random_gacha(self):
         member = [1, 2, 3]
-        weights = [1.5,0.52, 0.02]
+        weights = [1.5,0.62, 0.162]
         member_choice = choices(["kazuma","aqua","megumin","darkness"])
         member_star = choices(member,weights)
         print(member_star)
