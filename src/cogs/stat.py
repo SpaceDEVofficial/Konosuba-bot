@@ -1,5 +1,5 @@
 import os
-
+from utils.checks import require
 from utils.db_tool import DB_tools
 import discord
 import koreanbots
@@ -42,6 +42,7 @@ class MyStatcordCog(commands.Cog):
         em.set_thumbnail(url="https://media.discordapp.net/attachments/885771035243347978/888347900592128030/konosubaLogo.png")
         await ctx.reply(embed=em)
 
+    @require()
     @commands.command(name="하트인증",help="각각의 봇 사이트에서 하트를 인증할수있어!")
     async def heart_check(self,ctx):
         await self.get_heart(ctx=ctx,id=ctx.author.id)
