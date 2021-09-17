@@ -1,5 +1,6 @@
 import os
 
+from utils.db_tool import DB_tools
 import discord
 import koreanbots
 import UniqueBotsKR
@@ -18,23 +19,32 @@ class MyStatcordCog(commands.Cog):
 
     async def get_heart(self,ctx,id:int):
         li = []
+        quts = 0
         UB = await self.ub.getHeart(id)
         KB = await self.kb.get_user_vote(user_id=id,bot_id=885712681498214450)
         if UB:
             li.append("UniqueBots: ❤인증완료!")
+            await DB_tools(ctx=ctx, bot=self.bot).heart_check_gift()
+            quts += 5
         else:
             li.append("UniqueBots: 💔인증실패..[여기](<https://uniquebots.kr/bots/info/885712681498214450>)로 가셔서 하트 눌러주세요!💕")
         if KB:
             li.append("KoreanBots: ❤인증완료!")
+            await DB_tools(ctx=ctx, bot=self.bot).heart_check_gift()
+            quts += 5
         else:
             li.append("KoreanBots: 💔인증실패..[여기](<https://koreanbots.dev/bots/885712681498214450/vote>)로 가셔서 하트 눌러주세요!💕")
         em = discord.Embed(
             title=f"{ctx.author}님의 하트여부",
             description="\n".join(li)
         )
+        em.add_field(name="총 보상",value=f"총 `{quts}`개의 쿼츠를 드렸습니다!")
+        em.set_thumbnail(url="https://media.discordapp.net/attachments/885771035243347978/888347900592128030/konosubaLogo.png")
+        await ctx.reply(embed=em)
 
     @commands.command(name="하트인증",help="각각의 봇 사이트에서 하트를 인증할수있어!")
     async def heart_check(self,ctx):
+        await self.get_heart(ctx=ctx,id=ctx.author.id)
 
 
 def setup(bot):
