@@ -45,6 +45,8 @@ class MyStatcordCog(commands.Cog):
         )
         em.add_field(name="총 보상",value=f"총 `{quts}`개의 쿼츠를 드렸습니다!")
         em.set_thumbnail(url="https://media.discordapp.net/attachments/885771035243347978/888347900592128030/konosubaLogo.png")
+        if quts == 0:
+            ctx.command.reset_cooldown(ctx)
         await ctx.reply(embed=em)
 
     @require()
@@ -52,6 +54,7 @@ class MyStatcordCog(commands.Cog):
     @commands.cooldown(1,60*60,commands.BucketType.user)
     async def heart_check(self,ctx):
         if ctx.guild.id != 847729860881154078:
+            ctx.command.reset_cooldown(ctx)
             return await embeds(ctx=ctx).Not_support_guild()
         await self.get_heart(ctx=ctx,id=ctx.author.id)
 
