@@ -22,13 +22,15 @@ class MyStatcordCog(commands.Cog):
         quts = 0
         UB = await self.ub.getHeartUser(user_id=id)
         KB = await self.kb.get_user_vote(user_id=id,bot_id=885712681498214450)
+        print(f"UB: {UB}")
+        print(f"KB: {KB}")
         if UB:
             li.append("UniqueBots: ❤인증완료!")
             await DB_tools(ctx=ctx, bot=self.bot).heart_check_gift()
             quts += 5
         else:
             li.append("UniqueBots: 💔인증실패..[여기](<https://uniquebots.kr/bots/info/885712681498214450>)로 가셔서 하트 눌러주세요!💕")
-        if KB:
+        if KB['data']['voted']:
             li.append("KoreanBots: ❤인증완료!")
             await DB_tools(ctx=ctx, bot=self.bot).heart_check_gift()
             quts += 5

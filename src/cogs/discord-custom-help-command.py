@@ -43,7 +43,7 @@ class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="도움")
+    @commands.command(name="도움",aliases= [ 'help', '도움', '명령어', 'commands', 'HELP' ])
     # @commands.bot_has_permissions(add_reactions=True,embed_links=True)
     async def helps(self, ctx, *input):
         """Shows all modules of that bot"""

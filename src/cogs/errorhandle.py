@@ -21,7 +21,7 @@ class handling(commands.Cog):
         elif isinstance(error,commands.CommandOnCooldown):
             return await ctx.reply(f"마력이 다 회복되려면 `{round(error.retry_after, 2)}`초 남았어요..")
         elif isinstance(error,commands.CommandNotFound):
-            return await ctx.reply(f"`{ctx.command.name}`?")
+            return await ctx.reply(f"`{ctx.invoked_with}`?")
 
 def setup(bot):
     bot.add_cog(handling(bot))
