@@ -20,7 +20,7 @@ class MyStatcordCog(commands.Cog):
     async def get_heart(self,ctx,id:int):
         li = []
         quts = 0
-        UB = await self.ub.getHeart(id)
+        UB = await self.ub.getHeartUser(user_id=id)
         KB = await self.kb.get_user_vote(user_id=id,bot_id=885712681498214450)
         if UB:
             li.append("UniqueBots: ❤인증완료!")
@@ -44,6 +44,7 @@ class MyStatcordCog(commands.Cog):
 
     @require()
     @commands.command(name="하트인증",help="각각의 봇 사이트에서 하트를 인증할수있어!")
+    @commands.cooldown(1,60*60,commands.BucketType.user)
     async def heart_check(self,ctx):
         await self.get_heart(ctx=ctx,id=ctx.author.id)
 
