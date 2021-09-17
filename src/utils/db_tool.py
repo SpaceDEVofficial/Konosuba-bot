@@ -51,3 +51,6 @@ class DB_tools:
         except:
             return False
 
+    async def heart_check_gift(self):
+        await self.bot.db_con.execute("UPDATE user_db SET quts = quts + 5 WHERE user_id = ?", (self.ctx.author.id,))
+        return True
