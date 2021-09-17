@@ -49,6 +49,5 @@ my_bot = MyBot(command_prefix=os.getenv("PREFIX"), intents=INTENTS)
 
 
 if __name__ == "__main__":
-    start_loop()
     my_bot.loop.run_until_complete(MyBot.create_db_con())
     my_bot.run(os.getenv('TOKEN'))
