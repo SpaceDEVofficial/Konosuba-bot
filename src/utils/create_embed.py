@@ -164,3 +164,13 @@ class embeds:
         em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
         em.set_footer(text="이 봇은 NEXON에서 서비스하는 봇이 아닙니다.")
         return await self.ctx.reply(embed=em)
+
+    async def chart_embed(self,img,img_name,url):
+        file = discord.File(img, img_name)
+        em = discord.Embed(
+            title=f"코노스바 봇 서버차트!",
+            description="시간별 봇 서버수를 차트표로 보여드려요!"
+        )
+        em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
+        em.set_image(url=url)
+        return await self.ctx.reply(file=file,embed=em)

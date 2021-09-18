@@ -13,7 +13,7 @@ async def out():
     async with aiosqlite.connect("db/db.db") as con:
         data = list(await (await con.execute("SELECT * FROM guild_count")).fetchall())
         if len(data) > 50:
-            data = data[-(len(data)-50):]
+            data = data[(len(data)-50):]
         x = []
         y = []
         for i in data:
