@@ -174,3 +174,13 @@ class embeds:
         em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
         em.set_image(url=url)
         return await self.ctx.reply(file=file,embed=em)
+
+    async def vote_chart_embed(self,img,img_name,url):
+        file = discord.File(img, img_name)
+        em = discord.Embed(
+            title=f"코노스바 봇 투표차트!",
+            description="시간별 봇 투표수를 차트표로 보여드려요!"
+        )
+        em.set_thumbnail(url="https://i.imgur.com/mKq53H3.png")
+        em.set_image(url=url)
+        return await self.ctx.reply(file=file,embed=em)

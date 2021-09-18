@@ -68,5 +68,15 @@ class MyStatcordCog(commands.Cog):
             await msg2.delete()
             await embeds(ctx=ctx).chart_embed(img=img["img"], img_name='output.png', url="attachment://output.png")
 
+    @commands.command(name="하트차트", help="봇 서버수를 시간별 차트로 보여줘!")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def vote_chart(self, ctx):
+        msg = await ctx.reply("> API서버에 요청하는 중입니다... <a:loading:888625946565935167>")
+        img = await genchart(bot=self.bot).GeneratevotechartCard()
+        if img["type"]:
+            msg2 = await msg.edit(content="> 이미지 생성완료! 임베드 전송중... <a:loading:888625946565935167>")
+            await msg2.delete()
+            await embeds(ctx=ctx).vote_chart_embed(img=img["img"], img_name='output.png', url="attachment://output.png")
+
 def setup(bot):
     bot.add_cog(MyStatcordCog(bot))
