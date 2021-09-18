@@ -6,14 +6,15 @@ from quart import request
 from io import BytesIO
 import aiosqlite
 import math
-import warnings
-
-warnings.filterwarnings("ignore")
 async def out():
     async with aiosqlite.connect("db/db.db") as con:
         data = list(await (await con.execute("SELECT * FROM guild_count")).fetchall())
-        if len(data) > 50:
-            data = data[(len(data)-50):]
+        print(len(data))
+        """
+        if len(data) > 27:
+            data = data[(len(data) - 27):]
+        print(len(data))
+        """
         x = []
         y = []
         for i in data:
@@ -23,21 +24,28 @@ async def out():
         print(y,x)
         fig, ax = plt.subplots()
         ax.set(title='Konosuba bot Server chart!')
+        #plt.plot_date(x, y, linestyle='solid')
         plt.plot_date(x, y, linestyle='solid')
+        plt.margins(0)
         plt.gcf().set_size_inches(20, 10)
-        new_list = range(math.floor(min(y)), math.ceil(max(y)) + 1)
+        new_list = range(math.floor(min(y))-3, math.ceil(max(y)) + 3)
         plt.yticks(new_list)
-        ax.xaxis.set_tick_params(rotation=35, labelsize=10)
+        #ax.xaxis.set_tick_params(labelsize=5.5)
+        #ax.set_xticklabels(x)
+        fig.autofmt_xdate(rotation=65)
+        plt.grid(True)
         bytesio = BytesIO()
-        plt.savefig(bytesio, dpi=300, format='png')
+        plt.savefig(bytesio, dpi=300, format='png',bbox_inches='tight')
         bytesio.seek(0)
         return bytesio
 
 async def vote_out():
     async with aiosqlite.connect("db/db.db") as con:
         data = list(await (await con.execute("SELECT * FROM vote_count")).fetchall())
-        if len(data) > 50:
-            data = data[(len(data)-50):]
+        """
+        if len(data) > 27:
+            data = data[(len(data)-27):]
+        """
         x = []
         y = []
         for i in data:
@@ -46,14 +54,18 @@ async def vote_out():
         #x = [datetime.strptime(date, "%Y/%m/%d %H:%M").date() for date in datas]
         print(y,x)
         fig, ax = plt.subplots()
-        ax.set(title='Konosuba bot Server chart!')
+        ax.set(title='Konosuba bot Heart❤ chart! ')
         plt.plot_date(x, y, linestyle='solid',color="red")
+        plt.margins(0)
         plt.gcf().set_size_inches(20, 10)
-        new_list = range(math.floor(min(y)), math.ceil(max(y)) + 1)
+        new_list = range(math.floor(min(y))-2, math.ceil(max(y)) + 3)
         plt.yticks(new_list)
-        ax.xaxis.set_tick_params(rotation=35, labelsize=10)
+        # ax.xaxis.set_tick_params(rotation=75, labelsize=7.5)
+        ax.set_xticklabels(x)
+        fig.autofmt_xdate(rotation=65)
+        plt.grid(True)
         bytesio = BytesIO()
-        plt.savefig(bytesio, dpi=300, format='png')
+        plt.savefig(bytesio, dpi=300, format='png',bbox_inches='tight')
         bytesio.seek(0)
         return bytesio
 
