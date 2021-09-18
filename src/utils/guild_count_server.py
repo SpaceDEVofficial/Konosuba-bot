@@ -6,9 +6,14 @@ from quart import request
 from io import BytesIO
 import aiosqlite
 import math
+import warnings
+
+warnings.filterwarnings("ignore")
 async def out():
     async with aiosqlite.connect("db/db.db") as con:
-        data = await (await con.execute("SELECT * FROM guild_count")).fetchall()
+        data = list(await (await con.execute("SELECT * FROM guild_count")).fetchall())
+        if len(data) > 50:
+            data = data[-(len(data)-50):]
         x = []
         y = []
         for i in data:

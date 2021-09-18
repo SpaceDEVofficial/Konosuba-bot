@@ -7,7 +7,7 @@ import aiosqlite
 
 sql_create_initial_thunder_table = """ CREATE TABLE IF NOT EXISTS guild_count (
 
-                                    counts integer PRIMARY KEY AUTOINCREMENT,
+                                    counts integer,
 
                                     dates text DEFAULT (datetime('now','localtime'))
 
