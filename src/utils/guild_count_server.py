@@ -6,22 +6,19 @@ from quart import request
 from io import BytesIO
 import aiosqlite
 import math
+from matplotlib import rcParams
+rcParams.update({'figure.autolayout': True})
 async def out():
     async with aiosqlite.connect("db/db.db") as con:
         data = list(await (await con.execute("SELECT * FROM guild_count")).fetchall())
-        print(len(data))
-        """
-        if len(data) > 27:
-            data = data[(len(data) - 27):]
-        print(len(data))
-        """
+        if len(data) > 47:
+            data = data[(len(data) - 47):]
         x = []
         y = []
         for i in data:
-            x.append(i[1][:-3])
+            x.append(i[1])
             y.append(i[0])
         #x = [datetime.strptime(date, "%Y/%m/%d %H:%M").date() for date in datas]
-        print(y,x)
         fig, ax = plt.subplots()
         ax.set(title='Konosuba bot Server chart!')
         #plt.plot_date(x, y, linestyle='solid')
@@ -42,17 +39,14 @@ async def out():
 async def vote_out():
     async with aiosqlite.connect("db/db.db") as con:
         data = list(await (await con.execute("SELECT * FROM vote_count")).fetchall())
-        """
-        if len(data) > 27:
-            data = data[(len(data)-27):]
-        """
+        if len(data) > 47:
+            data = data[(len(data) - 47):]
         x = []
         y = []
         for i in data:
             x.append(i[1][:-3])
             y.append(i[0])
         #x = [datetime.strptime(date, "%Y/%m/%d %H:%M").date() for date in datas]
-        print(y,x)
         fig, ax = plt.subplots()
         ax.set(title='Konosuba bot Heart❤ chart! ')
         plt.plot_date(x, y, linestyle='solid',color="red")

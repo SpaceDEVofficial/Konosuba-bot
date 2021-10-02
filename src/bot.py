@@ -1,3 +1,4 @@
+import json
 import os
 from utils.create_embed import embeds
 import discord
@@ -7,13 +8,25 @@ import random
 from dotenv import load_dotenv
 import aiosqlite
 import config
-from utils.guild_count_loop import start_loop
+from pycord_components import PycordComponents
+from utils.emojimgr import EmojiMgr
+from utils.rchatmgr import RandchatMgr
+from utils import checks
 load_dotenv(verbose=True)
 
-
+with open('./data/emojis.json', 'r', encoding='utf-8') as emojifile:
+    emojis = json.load(emojifile)
 class MyBot(commands.Bot):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.add_check(checks.not_bot)
+        rmgr = RandchatMgr()
+        rmgr.start_match_task()
+        emj = EmojiMgr(self, emojis['emoji-server'], emojis['emojis'])
+        self.datas = {
+            'emj': emj,
+            'rmgr': rmgr
+        }
         AutoCogs(self)
         self.remove_command("help")
     async def on_ready(self):
@@ -46,7 +59,7 @@ class MyBot(commands.Bot):
 
 INTENTS = discord.Intents.all()
 my_bot = MyBot(command_prefix=os.getenv("PREFIX"), intents=INTENTS)
-
+PycordComponents(bot=my_bot)
 
 if __name__ == "__main__":
     my_bot.loop.run_until_complete(MyBot.create_db_con())
